@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Berita Trending - Duta Kesehatan Jawa Timur</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Berita Kesehatan Trending" name="keywords">
+    <meta content="Berita kesehatan trending nasional dan internasional" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00a65a;
+            --secondary-color: #00733f;
+            --text-dark: #333;
+            --text-light: #666;
+            --trending-color: #ff6b6b;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            color: white;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .search {
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 45px 10px 15px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .social a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            margin: 0 3px;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Navigation */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand {
+            display: none;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item .nav-link {
+            padding: 18px 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item .nav-link:hover,
+        .nav-item .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 60px 0 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            background: white;
+            padding: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            color: var(--text-dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Trending Section */
+        .trending-section {
+            padding: 60px 0;
+        }
+
+        /* Featured News */
+        .featured-news {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: 0.3s;
+        }
+
+        .featured-news:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,166,90,0.2);
+        }
+
+        .featured-news img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 30px;
+        }
+
+        .trending-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--trending-color), #ff8787);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .featured-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+
+        .featured-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .news-meta i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .read-more:hover {
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            transform: translateX(5px);
+        }
+
+        /* News Grid */
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,166,90,0.15);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .news-card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        .news-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 14px;
+            flex-grow: 1;
+        }
+
+        .views-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .views-badge i {
+            margin-right: 5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-widget h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .trending-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .trending-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            transition: 0.3s;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-item:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+        }
+
+        .trending-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .trending-item-content h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+        }
+
+        .trending-item-content span {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Tag Cloud */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f8f9fa;
+            color: var(--text-dark);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-widget {
+            margin-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-widget ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-widget ul li a {
+            color: rgba(255,255,255,0.7);
+            transition: 0.3s;
+        }
+
+        .footer-widget ul li a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            background: #1a252f;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                display: block;
+                color: white !important;
+                background: var(--primary-color);
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .featured-news img {
+                height: 250px;
+            }
+
+            .featured-content h2 {
+                font-size: 24px;
+            }
+
+            .filter-tabs {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12">
+                    <div class="logo text-center text-lg-left">
+                        <h1><i class="fas fa-heartbeat"></i> Duta Kesehatan</h1>
+                        <p>Jawa Timur</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="search">
+                        <input type="text" placeholder="Cari berita kesehatan...">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 text-center text-lg-right">
+                    <div class="social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Header Start -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link">Beranda</a>
+                        <a href="profile.html" class="nav-item nav-link">Profil Website</a>
+                        <a href="berita-jatim.html" class="nav-item nav-link">Berita Kesehatan Jatim</a>
+                        <a href="trending.html" class="nav-item nav-link active">Trending Nasional & Internasional</a>
+                        <a href="solusi-penyakit.html" class="nav-item nav-link">Solusi & Penanganan Penyakit</a>
+                        <a href="tentang-duta.html" class="nav-item nav-link">Tentang Duta Kesehatan</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak Kami</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-fire"></i> Berita Kesehatan Trending</h1>
+            <p>Informasi kesehatan terkini yang sedang ramai dibicarakan</p>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Filter Section Start -->
+    <div class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="semua">Semua</button>
+                <button class="filter-btn" data-filter="nasional">Nasional</button>
+                <button class="filter-btn" data-filter="internasional">Internasional</button>
+                <button class="filter-btn" data-filter="covid">COVID-19</button>
+                <button class="filter-btn" data-filter="teknologi">Teknologi Medis</button>
+                <button class="filter-btn" data-filter="penelitian">Penelitian</button>
+            </div>
+        </div>
+    </div>
+    <!-- Filter Section End -->
+
+    <!-- Trending Section Start -->
+    <div class="trending-section">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Featured News -->
+                    <div class="featured-news" data-category="internasional">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop" alt="Featured News">
+                        <div class="featured-content">
+                            <div>
+                                <span class="trending-badge"><i class="fas fa-fire"></i> Trending #1</span>
+                                <span class="category-badge">Internasional</span>
+                            </div>
+                            <h2>WHO Umumkan Terobosan Baru dalam Pengobatan Kanker</h2>
+                            <p>Organisasi Kesehatan Dunia (WHO) mengumumkan metode terapi baru yang menunjukkan hasil menggembirakan dalam uji klinis fase 3 untuk pengobatan kanker stadium lanjut. Metode ini menggunakan kombinasi imunoterapi dan terapi gen yang terbukti meningkatkan angka harapan hidup pasien hingga 40%.</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-calendar"></i> 20 Januari 2026</span>
+                                <span><i class="far fa-user"></i> Dr. Sarah Johnson</span>
+                                <span class="views-badge"><i class="fas fa-eye"></i> 125.4K views</span>
+                            </div>
+                            <a href="#" class="read-more mt-3">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News Grid -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="nasional">
+                                <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">Nasional</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 89K</span>
+                                    </div>
+                                    <h4>Kemenkes Luncurkan Program Vaksinasi HPV Gratis untuk Remaja</h4>
+                                    <p>Kementerian Kesehatan meluncurkan program vaksinasi HPV gratis bagi remaja putri usia 11-13 tahun di seluruh Indonesia untuk mencegah kanker serviks.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 19 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="teknologi">
+                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">Teknologi Medis</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 76K</span>
+                                    </div>
+                                    <h4>AI Dapat Deteksi Alzheimer 10 Tahun Lebih Awal dari Gejala</h4>
+                                    <p>Peneliti mengembangkan sistem kecerdasan buatan yang mampu mendeteksi tanda-tanda Alzheimer hingga 10 tahun sebelum gejala klinis muncul.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 18 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="penelitian">
+                                <img src="https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">Penelitian</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 62K</span>
+                                    </div>
+                                    <h4>Studi: Olahraga 15 Menit Sehari Kurangi Risiko Kematian Dini 22%</h4>
+                                    <p>Penelitian terbaru menunjukkan bahwa aktivitas fisik ringan selama 15 menit setiap hari dapat mengurangi risiko kematian dini hingga 22%.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 17 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="covid">
+                                <img src="https://images.unsplash.com/photo-1584483766114-2cea6facdf57?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">COVID-19</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 54K</span>
+                                    </div>
+                                    <h4>Varian Baru COVID-19 Terdeteksi, Efektivitas Vaksin Masih Baik</h4>
+                                    <p>Varian baru COVID-19 telah terdeteksi di beberapa negara, namun penelitian awal menunjukkan vaksin yang ada masih efektif mencegah gejala berat.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 16 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="nasional">
+                                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">Nasional</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 48K</span>
+                                    </div>
+                                    <h4>BPJS Kesehatan Tambah Layanan Terapi Genetik dalam Jaminan</h4>
+                                    <p>BPJS Kesehatan mengumumkan penambahan layanan terapi genetik untuk penyakit langka dalam paket jaminan kesehatan nasional.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 15 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="news-card" data-category="internasional">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=220&fit=crop" alt="News">
+                                <div class="news-card-body">
+                                    <div>
+                                        <span class="category-badge">Internasional</span>
+                                        <span class="views-badge"><i class="fas fa-eye"></i> 41K</span>
+                                    </div>
+                                    <h4>FDA Setujui Obat Diabetes Baru dengan Efek Samping Minimal</h4>
+                                    <p>Badan Pengawas Obat Amerika (FDA) menyetujui obat diabetes generasi baru yang diklaim memiliki efektivitas tinggi dengan efek samping minimal.</p>
+                                    <div class="news-meta">
+                                        <span><i class="far fa-calendar"></i> 14 Jan 2026</span>
+                                    </div>
+                                    <a href="#" class="read-more mt-3">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <!-- Top 10 Trending -->
+                        <div class="sidebar-widget">
+                            <h3><i class="fas fa-chart-line"></i> Top 10 Trending</h3>
+                            <ul class="trending-list">
+                                <li class="trending-item">
+                                    <div class="trending-number">1</div>
+                                    <div class="trending-item-content">
+                                        <h5>Terobosan Pengobatan Kanker WHO</h5>
+                                        <span><i class="fas fa-eye"></i> 125.4K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">2</div>
+                                    <div class="trending-item-content">
+                                        <h5>Program Vaksinasi HPV Gratis</h5>
+                                        <span><i class="fas fa-eye"></i> 89K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">3</div>
+                                    <div class="trending-item-content">
+                                        <h5>AI Deteksi Alzheimer Lebih Awal</h5>
+                                        <span><i class="fas fa-eye"></i> 76K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">4</div>
+                                    <div class="trending-item-content">
+                                        <h5>Olahraga 15 Menit Kurangi Kematian</h5>
+                                        <span><i class="fas fa-eye"></i> 62K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">5</div>
+                                    <div class="trending-item-content">
+                                        <h5>Varian Baru COVID-19 Terdeteksi</h5>
+                                        <span><i class="fas fa-eye"></i> 54K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">6</div>
+                                    <div class="trending-item-content">
+                                        <h5>BPJS Tambah Layanan Terapi Gen</h5>
+                                        <span><i class="fas fa-eye"></i> 48K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">7</div>
+                                    <div class="trending-item-content">
+                                        <h5>FDA Setujui Obat Diabetes Baru</h5>
+                                        <span><i class="fas fa-eye"></i> 41K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">8</div>
+                                    <div class="trending-item-content">
+                                        <h5>Vaksin Malaria Terbukti Efektif</h5>
+                                        <span><i class="fas fa-eye"></i> 38K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">9</div>
+                                    <div class="trending-item-content">
+                                        <h5>Terapi Sel Punca untuk Jantung</h5>
+                                        <span><i class="fas fa-eye"></i> 33K views</span>
+                                    </div>
+                                </li>
+                                <li class="trending-item">
+                                    <div class="trending-number">10</div>
+                                    <div class="trending-item-content">
+                                        <h5>Antibiotik Baru Lawan Bakteri Super</h5>
+                                        <span><i class="fas fa-eye"></i> 29K views</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Popular Tags -->
+                        <div class="sidebar-widget">
+                            <h3><i class="fas fa-tags"></i> Tag Populer</h3>
+                            <div class="tag-cloud">
+                                <a href="#" class="tag">Kanker</a>
+                                <a href="#" class="tag">Vaksin</a>
+                                <a href="#" class="tag">COVID-19</a>
+                                <a href="#" class="tag">Diabetes</a>
+                                <a href="#" class="tag">AI Medis</a>
+                                <a href="#" class="tag">Terapi Gen</a>
+                                <a href="#" class="tag">Jantung</a>
+                                <a href="#" class="tag">Mental Health</a>
+                                <a href="#" class="tag">Nutrisi</a>
+                                <a href="#" class="tag">Olahraga</a>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter -->
+                        <div class="sidebar-widget">
+                            <h3><i class="fas fa-envelope"></i> Newsletter</h3>
+                            <p style="color: var(--text-light); margin-bottom: 20px;">Dapatkan berita kesehatan terbaru langsung ke email Anda</p>
+                            <form>
+                                <input type="email" class="form-control mb-3" placeholder="Email Anda" style="border: 2px solid #e0e0e0; padding: 12px; border-radius: 8px;">
+                                <button type="submit" class="btn-submit w-100">Berlangganan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Trending Section End -->
+
+    <!-- Footer Start -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Tautan Berguna</h3>
+                        <ul>
+                            <li><a href="profile.html">Profil Website</a></li>
+                            <li><a href="berita-jatim.html">Berita Kesehatan Jatim</a></li>
+                            <li><a href="trending.html">Berita Trending</a></li>
+                            <li><a href="solusi-penyakit.html">Solusi Penyakit</a></li>
+                            <li><a href="tentang-duta.html">Tentang Duta Kesehatan</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Layanan</h3>
+                        <ul>
+                            <li><a href="Konsultasi.html">Konsultasi Kesehatan</a></li>
+                            <li><a href="Program.html">Program Kesehatan</a></li>
+                            <li><a href="Edukasi.html">Edukasi Masyarakat</a></li>
+                            <li><a href="kampanye.html">Kampanye Kesehatan</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Kontak Kami</h3>
+                        <div class="contact-info">
+                            <p><i class="fa fa-map-marker-alt"></i> Jl. Kesehatan No. 123, Surabaya, Jawa Timur</p>
+                            <p><i class="fa fa-envelope"></i> info@dutakesehatanjatim.id</p>
+                            <p><i class="fa fa-phone"></i> (031) 1234-5678</p>
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href=""><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Newsletter</h3>
+                        <div class="newsletter">
+                            <p>Dapatkan informasi terbaru seputar kesehatan langsung ke email Anda.</p>
+                            <form>
+                                <input class="form-control" type="email" placeholder="Email Anda" style="border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; margin-bottom: 10px; padding: 10px; border-radius: 8px;">
+                                <button type="submit" style="background: var(--primary-color); color: white; border: none; border-radius: 25px; padding: 10px 30px; width: 100%; font-weight: 600; cursor: pointer;">Berlangganan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Footer Bottom Start -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Copyright &copy; 2026 Duta Kesehatan Jawa Timur. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Bottom End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Back to top button
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.back-to-top').fadeIn();
+            } else {
+                $('.back-to-top').fadeOut();
+            }
+        });
+        
+        $('.back-to-top').click(function () {
+            $('html, body').animate({scrollTop: 0}, 800);
+            return false;
+        });
+
+        // Filter functionality
+        $('.filter-btn').click(function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            var filter = $(this).data('filter');
+            
+            if(filter === 'semua') {
+                $('.news-card, .featured-news').fadeIn(400);
+            } else {
+                $('.news-card, .featured-news').hide();
+                $('.news-card[data-category="' + filter + '"], .featured-news[data-category="' + filter + '"]').fadeIn(400);
+            }
+        });
+
+        // Trending item hover effect
+        $('.trending-item').hover(
+            function() {
+                $(this).css('cursor', 'pointer');
+            }
+        );
+    </script>
+</body>
+</html

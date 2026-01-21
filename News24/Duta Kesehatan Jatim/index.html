@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Duta Kesehatan Jawa Timur - Beranda</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Duta Kesehatan Jawa Timur" name="keywords">
+    <meta content="Portal informasi kesehatan Jawa Timur" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/slick/slick.css" rel="stylesheet">
+    <link href="lib/slick/slick-theme.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00a65a;
+            --secondary-color: #00733f;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+        }
+
+        /* Top Header */
+        .top-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            color: white;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .search {
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 45px 10px 15px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .social a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            margin: 0 3px;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Navigation */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand {
+            display: none;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item .nav-link {
+            padding: 18px 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item .nav-link:hover,
+        .nav-item .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Top News */
+        .top-news {
+            padding: 30px 0;
+            background: #f8f9fa;
+        }
+
+        .tn-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tn-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .tn-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .tn-left .tn-img {
+            height: 500px;
+        }
+
+        .tn-right .tn-img {
+            height: 240px;
+        }
+
+        .tn-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 20px;
+        }
+
+        .tn-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .tn-title:hover {
+            color: var(--primary-color);
+        }
+
+        .tn-date {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        /* Category News */
+        .cat-news {
+            padding: 30px 0;
+        }
+
+        .cat-news h2 {
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .cn-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            margin-bottom: 15px;
+        }
+
+        .cn-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .cn-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .cn-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 15px;
+        }
+
+        .cn-title {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .cn-title:hover {
+            color: var(--primary-color);
+        }
+
+        .cn-date {
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        /* Main News */
+        .main-news {
+            padding: 30px 0;
+            background: #f8f9fa;
+        }
+
+        .main-news h2 {
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .mn-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            margin-bottom: 15px;
+        }
+
+        .mn-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mn-list {
+            display: flex;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .mn-list:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .mn-list .mn-img {
+            width: 150px;
+            height: 100px;
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+
+        .mn-list .mn-content {
+            padding: 15px;
+            flex: 1;
+        }
+
+        .mn-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .mn-title {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .mn-title:hover {
+            color: var(--primary-color);
+        }
+
+        .mn-list .mn-title {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .mn-date {
+            color: var(--text-light);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .mn-content p {
+            color: var(--text-light);
+            margin: 10px 0 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-widget h2 {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category li {
+            margin-bottom: 10px;
+        }
+
+        .category li a {
+            color: var(--text-dark);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .category li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .tags a {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #f0f0f0;
+            color: var(--text-dark);
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .tags a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .image img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-widget {
+            margin-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-widget ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-widget ul li a {
+            color: rgba(255,255,255,0.7);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-widget ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer .contact-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter button {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .newsletter button:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            background: #1a252f;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                display: block;
+                color: white !important;
+                background: var(--primary-color);
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+            .navbar-toggler {
+                border: none;
+                background: var(--primary-color);
+            }
+
+            .navbar-toggler-icon {
+                color: white;
+            }
+
+            .navbar-nav {
+                margin-top: 10px;
+            }
+
+            .top-header .col-lg-3, 
+            .top-header .col-lg-6 {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .tn-left .tn-img {
+                height: 300px;
+            }
+
+            .tn-right .tn-img {
+                height: 200px;
+            }
+
+            .mn-list .mn-img {
+                width: 100px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12">
+                    <div class="logo text-center text-lg-left">
+                        <h1><i class="fas fa-heartbeat"></i> Duta Kesehatan</h1>
+                        <p>Jawa Timur</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="search">
+                        <input type="text" placeholder="Cari berita kesehatan...">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 text-center text-lg-right">
+                    <div class="social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Header Start -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                        <a href="profile.html" class="nav-item nav-link">Profil Website</a>
+                        <a href="berita-jatim.html" class="nav-item nav-link">Berita Kesehatan Jatim</a>
+                        <a href="trending.html" class="nav-item nav-link">Trending Nasional & Internasional</a>
+                        <a href="solusi-penyakit.html" class="nav-item nav-link">Solusi & Penanganan Penyakit</a>
+                        <a href="tentang-duta.html" class="nav-item nav-link">Tentang Duta Kesehatan</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak Kami</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Top News Start-->
+    <div class="top-news">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 tn-left">
+                    <div class="tn-img">
+                        <img src="img/top-news-1.jpg" />
+                        <div class="tn-content">
+                            <div class="tn-content-inner">
+                                <a class="tn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                <a class="tn-title" href="">Program Vaksinasi Massal di Jawa Timur Capai Target 95%</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 tn-right">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="img/top-news-2.jpg" />
+                                <div class="tn-content">
+                                    <div class="tn-content-inner">
+                                        <a class="tn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                        <a class="tn-title" href="">Puskesmas Baru Dibuka di 5 Kecamatan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="img/top-news-3.jpg" />
+                                <div class="tn-content">
+                                    <div class="tn-content-inner">
+                                        <a class="tn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="tn-title" href="">Tips Menjaga Kesehatan di Musim Hujan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="img/top-news-4.jpg" />
+                                <div class="tn-content">
+                                    <div class="tn-content-inner">
+                                        <a class="tn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="tn-title" href="">Dinas Kesehatan Luncurkan Aplikasi Telemedicine</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tn-img">
+                                <img src="img/top-news-5.jpg" />
+                                <div class="tn-content">
+                                    <div class="tn-content-inner">
+                                        <a class="tn-date" href=""><i class="far fa-clock"></i>18 Januari 2026</a>
+                                        <a class="tn-title" href="">Kampanye Hidup Sehat Menyasar Generasi Muda</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top News End-->
+
+    <!-- Category News Start-->
+    <div class="cat-news">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2><i class="fas fa-hospital"></i> Berita Kesehatan Jawa Timur</h2>
+                    <div class="row cn-slider">
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-1.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                        <a class="cn-title" href="">Rumah Sakit Rujukan COVID-19 di Surabaya Siap Beroperasi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-2.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="cn-title" href="">Program Gizi Buruk di Jawa Timur Menurun 40%</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-3.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>18 Januari 2026</a>
+                                        <a class="cn-title" href="">Pelatihan Tenaga Kesehatan untuk Layanan Prima</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2><i class="fas fa-fire"></i> Trending Nasional & Internasional</h2>
+                    <div class="row cn-slider">
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-4.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                        <a class="cn-title" href="">WHO Luncurkan Panduan Kesehatan Mental Global</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-5.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="cn-title" href="">Vaksin Baru untuk Penyakit Tropis Dikembangkan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-6.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>18 Januari 2026</a>
+                                        <a class="cn-title" href="">Teknologi AI Bantu Deteksi Kanker Dini</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Category News End-->
+
+    <!-- Category News Start-->
+    <div class="cat-news" style="background: #f8f9fa;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2><i class="fas fa-stethoscope"></i> Solusi & Penanganan Penyakit</h2>
+                    <div class="row cn-slider">
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-7.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                        <a class="cn-title" href="">Cara Mengatasi Demam Berdarah dengan Cepat dan Tepat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-8.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="cn-title" href="">Penanganan Diabetes: Tips dan Panduan Lengkap</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-9.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>18 Januari 2026</a>
+                                        <a class="cn-title" href="">Mencegah dan Mengobati Hipertensi Secara Alami</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2><i class="fas fa-user-md"></i> Program Duta Kesehatan</h2>
+                    <div class="row cn-slider">
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-10.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>20 Januari 2026</a>
+                                        <a class="cn-title" href="">Rekrutmen Duta Kesehatan Jawa Timur 2026</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-11.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>19 Januari 2026</a>
+                                        <a class="cn-title" href="">Peran Duta Kesehatan dalam Edukasi Masyarakat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="img/cat-news-12.jpg" />
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        <a class="cn-date" href=""><i class="far fa-clock"></i>18 Januari 2026</a>
+                                        <a class="cn-title" href="">Sosialisasi Kesehatan di Desa-Desa Terpencil</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Category News End-->
+
+    <!-- Main News Start-->
+    <div class="main-news">

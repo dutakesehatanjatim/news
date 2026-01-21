@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Berita Kesehatan Jawa Timur - Duta Kesehatan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Berita Kesehatan Jawa Timur" name="keywords">
+    <meta content="Informasi kesehatan terkini dari seluruh kabupaten/kota di Jawa Timur" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00a65a;
+            --secondary-color: #00733f;
+            --text-dark: #333;
+            --text-light: #666;
+            --accent-color: #3498db;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            color: white;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .search {
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 45px 10px 15px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .social a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            margin: 0 3px;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Navigation */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand {
+            display: none;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item .nav-link {
+            padding: 18px 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item .nav-link:hover,
+        .nav-item .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 60px 0 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            padding: 40px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .map-container {
+            background: #e8f5e9;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .map-container i {
+            font-size: 80px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .map-container h3 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Region Filter */
+        .region-filter {
+            background: white;
+            padding: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-dropdown {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .filter-dropdown select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-dropdown select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 60px 0;
+        }
+
+        .region-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,166,90,0.2);
+        }
+
+        .region-title h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .region-title p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+
+        /* News Card */
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,166,90,0.15);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .news-card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .location-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .news-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        .news-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 14px;
+            flex-grow: 1;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .news-meta i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .read-more:hover {
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            transform: translateX(5px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-widget h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .stats-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stats-item h4 {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .stats-item span {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .quick-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+
+        .quick-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .quick-links a:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .quick-links i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        /* External Links Widget */
+        .external-links {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(52,152,219,0.3);
+            margin-bottom: 30px;
+        }
+
+        .external-links h3 {
+            color: white;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .external-link-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .external-link-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .external-link-item a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .external-link-item i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .external-link-item small {
+            display: block;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-widget {
+            margin-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-widget ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-widget ul li a {
+            color: rgba(255,255,255,0.7);
+            transition: 0.3s;
+        }
+
+        .footer-widget ul li a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            background: #1a252f;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                display: block;
+                color: white !important;
+                background: var(--primary-color);
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .news-card img {
+                height: 180px;
+            }
+
+            .region-title h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12">
+                    <div class="logo text-center text-lg-left">
+                        <h1><i class="fas fa-heartbeat"></i> Duta Kesehatan</h1>
+                        <p>Jawa Timur</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="search">
+                        <input type="text" placeholder="Cari berita kesehatan...">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 text-center text-lg-right">
+                    <div class="social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Header Start -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link">Beranda</a>
+                        <a href="profile.html" class="nav-item nav-link">Profil Website</a>
+                        <a href="berita-jatim.html" class="nav-item nav-link active">Berita Kesehatan Jatim</a>
+                        <a href="trending.html" class="nav-item nav-link">Trending Nasional & Internasional</a>
+                        <a href="solusi-penyakit.html" class="nav-item nav-link">Solusi & Penanganan Penyakit</a>
+                        <a href="tentang-duta.html" class="nav-item nav-link">Tentang Duta Kesehatan</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak Kami</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-newspaper"></i> Berita Kesehatan Jawa Timur</h1>
+            <p>Informasi kesehatan terkini dari 38 Kabupaten/Kota di Jawa Timur</p>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Region Filter Start -->
+    <div class="region-filter">
+        <div class="container">
+            <div class="filter-dropdown">
+                <select id="regionFilter">
+                    <option value="semua">Semua Wilayah Jawa Timur</option>
+                    <option value="surabaya">Kota Surabaya</option>
+                    <option value="malang">Kota Malang</option>
+                    <option value="kediri">Kota Kediri</option>
+                    <option value="blitar">Kota Blitar</option>
+                    <option value="mojokerto">Kota Mojokerto</option>
+                    <option value="madiun">Kota Madiun</option>
+                    <option value="pasuruan">Kota Pasuruan</option>
+                    <option value="probolinggo">Kota Probolinggo</option>
+                    <option value="batu">Kota Batu</option>
+                    <option value="kab-bangkalan">Kab. Bangkalan</option>
+                    <option value="kab-banyuwangi">Kab. Banyuwangi</option>
+                    <option value="kab-blitar">Kab. Blitar</option>
+                    <option value="kab-bojonegoro">Kab. Bojonegoro</option>
+                    <option value="kab-bondowoso">Kab. Bondowoso</option>
+                    <option value="kab-gresik">Kab. Gresik</option>
+                    <option value="kab-jember">Kab. Jember</option>
+                    <option value="kab-jombang">Kab. Jombang</option>
+                    <option value="kab-kediri">Kab. Kediri</option>
+                    <option value="kab-lamongan">Kab. Lamongan</option>
+                    <option value="kab-lumajang">Kab. Lumajang</option>
+                    <option value="kab-madiun">Kab. Madiun</option>
+                    <option value="kab-magetan">Kab. Magetan</option>
+                    <option value="kab-malang">Kab. Malang</option>
+                    <option value="kab-mojokerto">Kab. Mojokerto</option>
+                    <option value="kab-nganjuk">Kab. Nganjuk</option>
+                    <option value="kab-ngawi">Kab. Ngawi</option>
+                    <option value="kab-pacitan">Kab. Pacitan</option>
+                    <option value="kab-pamekasan">Kab. Pamekasan</option>
+                    <option value="kab-pasuruan">Kab. Pasuruan</option>
+                    <option value="kab-ponorogo">Kab. Ponorogo</option>
+                    <option value="kab-probolinggo">Kab. Probolinggo</option>
+                    <option value="kab-sampang">Kab. Sampang</option>
+                    <option value="kab-sidoarjo">Kab. Sidoarjo</option>
+                    <option value="kab-situbondo">Kab. Situbondo</option>
+                    <option value="kab-sumenep">Kab. Sumenep</option>
+                    <option value="kab-trenggalek">Kab. Trenggalek</option>
+                    <option value="kab-tuban">Kab. Tuban</option>
+                    <option value="kab-tulungagung">Kab. Tulungagung</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- Region Filter End -->
+
+    <!-- News Section Start -->
+    <div class="news-section">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Surabaya -->
+                    <div class="region-news" data-region="surabaya">
+                        <div class="region-title">
+                            <h2><i class="fas fa-map-marker-alt"></i> Kota Surabaya</h2>
+                            <p>Berita Kesehatan Terkini dari Ibu Kota Provinsi</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="news-card">
+                                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=220&fit=crop" alt="News">
+                                    <div class="news-card-body">
+                                        <div>
+                                            <span class="location-badge">Surabaya</span>
+                                            <span class="category-badge">Program</span>
+                                        </div>
+                                        <h4>Pemkot Surabaya Luncurkan Program Gerakan Anti Stunting</h4>
+                                        <p>Pemerintah Kota Surabaya meluncurkan program gerakan bersama anti stunting dengan target menurunkan angka stunting menjadi 10% di tahun 2026.</p>
+                                        <div class="news-meta">
+                                            <span><i class="far fa-calendar"></i> 19 Jan 2026</span>
+                                            <span><i class="far fa-eye"></i> 8.2K</span>
+                                        </div>
+                                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="news-card">
+                                    <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=220&fit=crop" alt="News">
+                                    <div class="news-card-body">
+                                        <div>
+                                            <span class="location-badge">Surabaya</span>
+                                            <span class="category-badge">Fasilitas</span>
+                                        </div>
+                                        <h4>RSUD Dr. Soetomo Tambah 50 Bed ICU untuk Pasien Kritis</h4>
+                                        <p>RSUD Dr. Soetomo menambah kapasitas ruang perawatan intensif dengan 50 tempat tidur ICU baru yang dilengkapi teknologi modern.</p>
+                                        <div class="news-meta">
+                                            <span><i class="far fa-calendar"></i> 18 Jan 2026</span>
+                                            <span><i class="far fa-eye"></i> 6.5K</span>
+                                        </div>
+                                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Malang -->
+                    <div class="region-news" data-region="malang">
+                        <div class="region-title">
+                            <h2><i class="fas fa-map-marker-alt"></i> Kota Malang</h2>
+                            <p>Update Kesehatan dari Kota Apel</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="news-card">
+                                    <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=220&fit=crop" alt="News">
+                                    <div class="news-card-body">
+                                        <div>
+                                            <span class="location-badge">Malang</span>
+                                            <span class="category-badge">Vaksinasi</span>
+                                        </div>
+                                        <h4>Dinkes Kota Malang Gelar Vaksinasi MR untuk Siswa SD</h4>
+                                        <p>Dinas Kesehatan Kota Malang menggelar vaksinasi MR (Measles Rubella) untuk siswa SD dengan target 15.000 anak.</p>
+                                        <div class="news-meta">
+                                            <span><i class="far fa-calendar"></i> 18 Jan 2026</span>
+                                            <span><i class="far fa-eye"></i> 5.8K</span>
+                                        </div>
+                                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="news-card">
+                                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=220&fit=crop" alt="News">
+                                    <div class="news-card-body">
+                                        <div>
+                                            <span class="location-badge">Malang</span>
+                                            <span class="category-badge">Inovasi</span>
+                                        </div>
+                                        <h4>Puskesmas Malang Terapkan Sistem Telemedicine</h4>
+                                        <p>Seluruh puskesmas di Kota Malang kini dilengkapi dengan sistem telemedicine untuk memudahkan konsultasi kesehatan jarak jauh.</p>
+                                        <div class="news-meta">
+                                            <span><i class="far fa-calendar"></i> 17 Jan 2026</span>
+                                            <span><i class="far fa-eye"></i> 4.9K</span>
+                                        </div>
+                                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kabupaten Jember -->
+                    <div class="region-news" data-region="kab-jember">
+                        <div class="region-title">
+                            <h2><i class="fas fa-map-marker-alt"></i> Kabupaten Jember</h2>
+                            <p>Informasi Kesehatan dari Kota Karnaval</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="news-card">
+                                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=220&fit=crop" alt="News">
+                                    <div class="news-card-body">
+                                        <div>
+                                            <span class="location-badge">Jember</span>
+                                            <span class="category-badge">Pencegahan</span>
+                                        </div>
+                                        <h4>Pemkab Jember Gencarkan Fogging untuk Cegah DBD</h4>
+                                        <p>Pemerintah Kabupaten Jember menggelar fogging massal di 31 kecamatan untuk mencegah merebaknya kasus Demam Berdarah Dengue.</p

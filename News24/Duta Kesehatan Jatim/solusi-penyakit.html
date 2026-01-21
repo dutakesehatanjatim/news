@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Berita Kesehatan Jawa Timur - Duta Kesehatan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00a65a;
+            --secondary-color: #00733f;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .top-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            color: white;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .search {
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 45px 10px 15px;
+            border: none;
+            border-radius: 25px;
+        }
+
+        .search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .social a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            margin: 0 3px;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand {
+            display: none;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item .nav-link {
+            padding: 18px 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item .nav-link:hover,
+        .nav-item .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .news-section {
+            padding: 50px 0;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            color: var(--text-dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 10px 0;
+            text-decoration: none;
+            display: block;
+        }
+
+        .news-title:hover {
+            color: var(--primary-color);
+        }
+
+        .news-meta {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .news-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+
+        .news-excerpt {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--secondary-color);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-widget h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .trending-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .trending-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .trending-title {
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .trending-title:hover {
+            color: var(--primary-color);
+        }
+
+        .trending-date {
+            color: var(--text-light);
+            font-size: 12px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list a {
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .category-list a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .category-count {
+            background: #f0f0f0;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-widget {
+            margin-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-widget ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-widget ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            background: #1a252f;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                display: block;
+                color: white !important;
+                background: var(--primary-color);
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12">
+                    <div class="logo text-center text-lg-left">
+                        <h1><i class="fas fa-heartbeat"></i> Duta Kesehatan</h1>
+                        <p>Jawa Timur</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="search">
+                        <input type="text" placeholder="Cari berita kesehatan...">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 text-center text-lg-right">
+                    <div class="social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Start -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link">Beranda</a>
+                        <a href="profile.html" class="nav-item nav-link">Profil Website</a>
+                        <a href="berita-jatim.html" class="nav-item nav-link active">Berita Kesehatan Jatim</a>
+                        <a href="trending.html" class="nav-item nav-link">Trending Nasional & Internasional</a>
+                        <a href="solusi-penyakit.html" class="nav-item nav-link">Solusi & Penanganan Penyakit</a>
+                        <a href="tentang-duta.html" class="nav-item nav-link">Tentang Duta Kesehatan</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak Kami</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-newspaper"></i> Berita Kesehatan Jawa Timur</h1>
+            <p>Informasi Terkini Seputar Kesehatan di Jawa Timur</p>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <div class="news-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- News Card 1 -->
+                    <div class="news-card">
+                        <img src="img/news-jatim-1.jpg" alt="Berita">
+                        <div class="news-content">
+                            <span class="news-badge">Program Kesehatan</span>
+                            <a href="#" class="news-title">Program Vaksinasi Massal di Jawa Timur Capai Target 95%</a>
+                            <div class="news-meta">
+                                <i class="far fa-calendar"></i> 20 Januari 2026
+                                <i class="far fa-user ml-3"></i> Admin Dinkes
+                                <i class="far fa-eye ml-3"></i> 1,234 views
+                            </div>
+                            <p class="news-excerpt">
+                                Program vaksinasi massal yang diluncurkan oleh Dinas Kesehatan Provinsi Jawa Timur telah mencapai target 95% cakupan. Program ini melibatkan ribuan tenaga kesehatan dan tersebar di 38 kabupaten/kota di Jawa Timur...
+                            </p>
+                            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News Card 2 -->
+                    <div class="news-card">
+                        <img src="img/news-jatim-2.jpg" alt="Berita">
+                        <div class="news-content">
+                            <span class="news-badge">Fasilitas Kesehatan</span>
+                            <a href="#" class="news-title">5 Puskesmas Baru Diresmikan di Wilayah Terpencil Jawa Timur</a>
+                            <div class="news-meta">
+                                <i class="far fa-calendar"></i> 19 Januari 2026
+                                <i class="far fa-user ml-3"></i> Admin Dinkes
+                                <i class="far fa-eye ml-3"></i> 987 views
+                            </div>
+                            <p class="news-excerpt">
+                                Gubernur Jawa Timur meresmikan 5 puskesmas baru yang tersebar di wilayah terpencil. Pembangunan puskesmas ini bertujuan untuk meningkatkan akses layanan kesehatan bagi masyarakat di daerah terpencil dan perbatasan...
+                            </p>
+                            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News Card 3 -->
+                    <div class="news-card">
+                        <img src="img/news-jatim-3.jpg" alt="Berita">
+                        <div class="news-content">
+                            <span class="news-badge">Inovasi Kesehatan</span>
+                            <a href="#" class="news-title">Dinkes Luncurkan Aplikasi Telemedicine untuk Konsultasi Online</a>
+                            <div class="news-meta">
+                                <i class="far fa-calendar"></i> 18 Januari 2026
+                                <i class="far fa-user ml-3"></i> Tim Redaksi
+                                <i class="far fa-eye ml-3"></i> 1,567 views
+                            </div>
+                            <p class="news-excerpt">
+                                Dinas Kesehatan Jawa Timur meluncurkan aplikasi telemedicine yang memungkinkan masyarakat berkonsultasi dengan dokter secara online. Aplikasi ini dilengkapi dengan fitur resep digital dan pengingat jadwal kontrol...
+                            </p>
+                            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- News Card 4 -->
+                    <div class="news-card">
+                        <img src="img/news-jatim-4.jpg" alt="Berita">
+                        <div class="news-content">
+                            <span class="news-badge">Edukasi Kesehatan</span>
+                            <a href="#" class="news-title">Kampanye Hidup Sehat Sasar 500 Sekolah di Jawa Timur</a>
+                            <div class="news-meta">
+                                <i class="far fa-calendar"></i> 17 Januari 2026
+                                <i class="far fa-user ml-3"></i> Tim Redaksi
+                                <i class="far fa-eye ml-3"></i> 876 views
+                            </div>
+                            <p class="news-excerpt">
+                                Program kampanye hidup sehat yang menargetkan generasi muda telah dimulai di 500 sekolah di Jawa Timur. Program ini mencakup edukasi tentang gizi seimbang, olahraga teratur, dan pencegahan penyakit menular...
+                            </p>
+                            <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <!-- Trending -->
+                        <div class="sidebar-widget">
+                            <h3><i class="fas fa-fire"></i> Berita Terpopuler</h3>
+                            <div class="trending-item">
+                                <span class="trending-number">1</span>
+                                <div>
+                                    <a href="#" class="trending-title">Program Vaksinasi Capai Target 95%</a>
+                                    <span class="trending-date"><i class="far fa-clock"></i> 20 Jan 2026</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">2</span>
+                                <div>
+                                    <a href="#" class="trending-title">5 Puskesmas Baru Diresmikan</a>
+                                    <span class="trending-date"><i class="far fa-clock"></i> 19 Jan 2026</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">3</span>
+                                <div>
+                                    <a href="#" class="trending-title">Aplikasi Telemedicine Diluncurkan</a>
+                                    <span class="trending-date"><i class="far fa-clock"></i> 18 Jan 2026</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-number">4</span>
+                                <div>
+                                    <a href="#" class="trending-title">Kampanye Hidup Sehat di Sekolah</a>
+                                    <span class="trending-date"><i class="far fa-clock"></i> 17 Jan 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="sidebar-widget">
+                            <h3><i class="fas fa-th-large"></i> Kategori</h3>
+                            <ul class="category-list">
+                                <li><a href="#">Program Kesehatan <span class="category-count">24</span></a></li>
+                                <li><a href="#">Fasilitas Kesehatan <span class="category-count">18</span></a></li>
+                                <li><a href="#">Inovasi Kesehatan <span class="category-count">15</span></a></li>
+                                <li><a href="#">Edukasi Kesehatan <span class="category-count">32</span></a></li>
+                                <li><a href="#">Penyakit Menular <span class="category-count">21</span></a></li>
+                                <li><a href="#">Gizi & Nutrisi <span class="category-count">19</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Tautan Berguna</h3>
+                        <ul>
+                            <li><a href="profile.html">Profil Website</a></li>
+                            <li><a href="berita-jatim.html">Berita Kesehatan Jatim</a></li>
+                            <li><a href="trending.html">Berita Trending</a></li>
+                            <li><a href="solusi-penyakit.html">Solusi Penyakit</a></li>
+                            <li><a href="tentang-duta.html">Tentang Duta Kesehatan</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h3>Kontak Kami</h3>
+                        <ul>
+                            <li>Jl. Kesehatan No. 123, Surabaya</li>
+                            <li>info@dutakesehatanjatim.id</li>
+                            <li>(031) 1234-5678</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <p>Copyright &copy; 2026 Duta Kesehatan Jawa Timur. All Rights Reserved</p>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.back-to-top').fadeIn();
+            } else {
+                $('.back-to-top').fadeOut();
+            }
+        });
+        $('.back-to-top').click(function () {
+            $('html, body').animate({scrollTop: 0}, 800);
+            return false;
+        });
+    </script>
+</body>
+</html>
